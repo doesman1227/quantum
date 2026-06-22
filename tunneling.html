@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>量子のふしぎルール｜量子力学ふしぎ図鑑</title>
-<meta name="description" content="電子キャラクターを主役に、量子化・重ね合わせ・波束の収縮・不確定性原理・量子もつれ・相互作用といった量子力学のふしぎなルールを、二重スリット実験やシュレーディンガーの猫の例とともにRPGゲーム風にやさしく解説。">
+<title>壁のすり抜けについて（量子トンネル効果）｜量子力学ふしぎ図鑑</title>
+<meta name="description" content="量子トンネル効果をやさしく解説。エネルギーが足りなくても、粒子は波として壁にしみ出し、確率的にすり抜ける。うすい壁・軽い粒子ほど通りやすい理由、太陽の核融合・放射性崩壊・半導体・走査トンネル顕微鏡などの実例まで。">
 <style>
 /* =========================================================
    量子力学ふしぎ図鑑  -  共通スタイル
@@ -546,7 +546,7 @@ body{
 <header class="site-header">
   <nav class="nav">
     <a class="brand" href="index.html"><span class="slime" data-spr="slime"></span> 量子力学ふしぎ図鑑</a>
-                                    <div class="nav-links">
+<div class="nav-links">
       <a href="index.html">ホーム</a>
       <div class="nav-group">
         <button type="button" class="nav-trigger">まなぶ ▾</button>
@@ -594,229 +594,94 @@ body{
   </nav>
 </header>
 
-<section class="hero" style="padding:54px 0 64px;">
+<section class="hero" style="padding:48px 0 56px;">
   <div class="wrap">
-    <span class="tier tier-intro">まなぶ</span><br>
-    <span class="eyebrow">まなぶ ・ ミクロの“もうひとつのルール”</span>
-    <h1 style="font-size:clamp(1.6rem,4.5vw,2.6rem);">量子のふしぎルール</h1>
-    <p class="lead">主役は<b>電子キャラクター</b>。電子そのものはいつも「電子」だけど、その“状態”は私たちの常識とぜんぜんちがうルールで決まる。6つのふしぎを体験しよう。</p>
+    <span class="tier tier-adv">コラム</span><br>
+    <span class="eyebrow">こらむ ・ もっと知りたい</span>
+    <h1 style="font-size:clamp(1.6rem,4.5vw,2.6rem);">壁のすり抜けについて</h1>
+    <p class="lead">本来こえられないはずの“壁”を、ミクロの粒子はときどきすり抜ける――量子トンネル効果。
+    SFのようでいて、太陽が輝く理由にもなっている、れっきとした自然のルールです。</p>
   </div>
 </section>
 
 <section class="section-pad">
   <div class="wrap">
-    <div class="rpg-window with-slime reveal">
+    <div class="answer reveal">
+      <span class="verdict">ひとことで：ミクロの世界では、本来こえられないはずの“壁”を、確率的にすり抜けられる。</span>
+      <p>ボールは、勢いが足りなければ壁を越えられず必ず跳ね返る。ところが電子のような小さな粒子は、
+      <b>エネルギーが足りなくても、ときどき壁の向こうに現れる</b>。これが<b>量子トンネル効果</b>だよ。</p>
+    </div>
+
+    <div class="rpg-window with-slime reveal" style="margin:22px 0;">
       <span class="who" data-spr="electron"></span>
-      <p>「やあ、ぼくが電子だ。これから見せるのは“ぼく自身”じゃなくて、ぼくの<span class="tag">状態</span>のふしぎ。
-      位置・スピン・エネルギー…ぜんぶ、ちょっと変わったルールで決まるんだ。」</p>
+      <p>「ぼくたち電子は“波”でもある。壁にぶつかっても、波が壁の中に<span class="tag">少しだけしみ出す</span>。
+      壁がうすければ、しみ出した波が向こう側に残って――<span class="tag">すり抜けた！</span>ってことになるんだ。」</p>
     </div>
-  </div>
-</section>
 
-<!-- ===== ルール1：量子化 ===== -->
-<section>
-  <div class="wrap">
-    <div class="rule reveal" id="r-quantize" style="scroll-margin-top:80px">
-      <span class="num">1</span>
-      <h3>飛び飛びの状態（量子化）</h3>
-      <p>電子の位置・スピン・エネルギーなどは、すべて<b>“飛び飛びの値”しかとれない</b>。
-      階段のように、決まった段にしか立てないイメージ。坂道のようになめらかには変われない。</p>
+    <span class="eyebrow">① 日常では“絶対ムリ”</span>
+    <h2 class="section-title">エネルギーが足りなければ越えられない</h2>
+    <p>坂の途中の段差を、勢いの足りないボールは越えられず戻ってくる。私たちの世界では、
+    壁を越えるには<b>それ以上のエネルギー</b>が必ず要る。100回やっても1000回やっても、足りなければ越えられない。</p>
 
-      <p style="margin-top:16px;"><b>① エネルギー</b>（水素原子の中の電子の例）</p>
-      <table class="energy">
-        <tr><th>準位</th><th>エネルギー Eₙ</th></tr>
-        <tr><td>n = 1</td><td>−13.6 eV</td></tr>
-        <tr><td>n = 2</td><td>−3.40 eV</td></tr>
-        <tr><td>n = 3</td><td>−1.51 eV</td></tr>
-        <tr><td>n = 4</td><td>−0.85 eV</td></tr>
-        <tr><td>n = ∞</td><td>0 eV（電離）</td></tr>
-        <tr><td class="no">例</td><td class="no">−5.00 eV は存在できない！</td></tr>
-      </table>
+    <span class="eyebrow" style="margin-top:30px;">② 粒子は“波”だから、しみ出す</span>
+    <h2 class="section-title">壁の中でも、波はゼロにならない</h2>
+    <div class="illfig reveal" style="max-width:420px;"><svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="波が壁をすり抜ける">
+  <line x1="8" y1="120" x2="312" y2="120" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+  <rect x="138" y="22" width="44" height="98" fill="#33425c" stroke="#7a8aa0" stroke-width="1.5"/>
+  <text x="160" y="16" fill="#bcd2ee" font-size="11" text-anchor="middle" font-family="sans-serif">壁（カベ）</text>
+  <path d="M10 74 q11 -26 22 0 q11 26 22 0 q11 -26 22 0 q11 26 22 0 q11 -26 22 0 q11 26 22 0" fill="none" stroke="#4aa3df" stroke-width="2.8"/>
+  <path d="M138 60 Q160 80 182 100" fill="none" stroke="#9fc4e8" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <path d="M138 88 Q160 92 182 92" fill="none" stroke="#9fc4e8" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <path d="M182 96 q7 -8 14 0 q7 8 14 0 q7 -8 14 0 q7 8 14 0 q7 -8 14 0 q7 8 14 0 q7 -8 14 0" fill="none" stroke="#4aa3df" stroke-width="1.8"/>
+  <circle cx="300" cy="96" r="5" fill="#e0a800"/>
+  <text x="60" y="140" fill="#bcd2ee" font-size="10" text-anchor="middle" font-family="sans-serif">大きな波</text>
+  <text x="250" y="140" fill="#bcd2ee" font-size="10" text-anchor="middle" font-family="sans-serif">小さくなって“すり抜け”</text>
+</svg></div>
+    <p>量子の世界では、粒子は<a href="rules.html#r-superpose">波（波動関数）</a>として広がっている。
+    波は壁にぶつかっても急にゼロにならず、<b>壁の中へジワッとしみ込む</b>。
+    壁がうすければ、しみ込んだ波が反対側にわずかに残る。その分だけ「向こう側で見つかる確率」が生まれる――これがすり抜けの正体だ。</p>
 
-      <p style="margin-top:16px;"><b>② スピン</b>（電子はスピン½）</p>
-      <div class="spin-demo">
-        <div class="s"><div class="arr">⬆️</div>上向き（+½）</div>
-        <div class="s"><div class="arr">⬇️</div>下向き（−½）</div>
-      </div>
-      <p>スピンの向きは、たった<b>2種類だけ</b>。中間はない。</p>
-
-      <div class="point"><b>ポイント：</b>電子そのものは電子のまま。位置・スピン・エネルギーなどの“状態”が飛び飛びの値しかとれないのが「量子化」。</div>
-      <div class="btn-row"><a class="btn btn-primary" href="levels.html">🎮 「準位ジャンプ」で体験する</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== ルール2：重ね合わせ ===== -->
-<section class="section-pad">
-  <div class="wrap">
-    <div class="rule c-green reveal" id="r-superpose" style="scroll-margin-top:80px">
-      <span class="num">2</span>
-      <h3>観測されるまで状態は決まらない（重ね合わせ）</h3>
-      <p>電子キャラクターは、観測されるまで、いくつかの状態を<b>“重ね合わせ”たまま同時に存在</b>している。</p>
-      <p style="text-align:center; font-size:1.4rem; margin:18px 0;">
-        位置A ☁️ ＋ 位置B ☁️ ＋ 位置C ☁️ &nbsp; → &nbsp; 👁️ 観測 → &nbsp; <b>「位置Bにいた！」</b>
-      </p>
-      <p>観測する前は、Aにも・Bにも・Cにも“可能性として”いる。観測した瞬間、そのうちの1つに決まる。</p>
-      <div class="point" style="background:var(--green-soft);"><b>ポイント：</b>観測前は複数の状態が同時にある（重ね合わせ）。観測によって1つに確定する！</div>
-
-      <div style="margin-top:16px; padding:14px 16px; border:1px dashed var(--line); border-radius:10px; background:#f5fbff;">
-        <b style="color:var(--blue-deep);">💡 有名な実験：二重スリット</b>
-        <p style="margin:6px 0 0; font-size:.92rem; color:var(--ink-soft);">電子を1個ずつ2つのすき間に撃つと、見ていないときは“波”として両方を同時に通り、
-        スクリーンに<b>しま模様（干渉）</b>が現れる。ところが「どちらを通った？」と<b>観測したとたん</b>、
-        しま模様は消えて、“粒”のように片方だけを通った振る舞いに変わる。――観測が結果を変える、量子の代名詞のような実験だよ。</p>
-        <a class="more" href="slit.html" style="margin-top:8px;">🌊 二重スリット実験ラボで体験する →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== ルール3：波束の収縮 ===== -->
-<section>
-  <div class="wrap">
-    <div class="rule c-orange reveal" id="r-collapse" style="scroll-margin-top:80px">
-      <span class="num">3</span>
-      <h3>観測で状態が決まる（波束の収縮）</h3>
-      <p>観測（測定）によって、重ね合わせの中から1つの状態に確定する。
-      たとえばスピンが「⬆️と⬇️が重なった状態」だったとして…</p>
-      <p style="text-align:center; font-size:1.3rem; margin:16px 0;">
-        ⬆️＋⬇️（重ね合わせ） &nbsp; → 👁️観測 → &nbsp; <b>⬇️ だった！</b>
-      </p>
-      <div class="point" style="background:var(--orange-soft); border-left-color:var(--orange);">
-        <b style="color:var(--orange);">ポイント：</b>電子そのものが変わるのではない。電子の“状態”が確定するだけ！</div>
-
-      <div style="margin-top:16px; padding:14px 16px; border:1px dashed var(--line); border-radius:10px; background:#fff8f1;">
-        <b style="color:var(--blue-deep);">🐱 シュレーディンガーの猫</b>
-        <p style="margin:6px 0 0; font-size:.92rem; color:var(--ink-soft);">箱の中の猫の運命を、ミクロな粒子の重ね合わせとつないだら…理屈の上では
-        「生きた猫」と「死んだ猫」が<b>重なった状態</b>になってしまう。フタを開けて<b>観測した瞬間</b>に、どちらか一方に決まる。
-        ――重ね合わせと観測のふしぎを、猫でたとえた有名な思考実験だよ。</p>
-      </div>
-      <div class="btn-row"><a class="btn btn-primary" href="collapse.html">🎮 「観測と収縮」で体験する</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== ルール4：不確定性原理 ===== -->
-<section class="section-pad">
-  <div class="wrap">
-    <div class="rule reveal">
-      <span class="num">4</span>
-      <h3>不確定性原理（同時には決められない）</h3>
-      <p>電子の「位置」と「運動量（動きの勢い）」は、<b>両方を同時にきっちり決めることができない</b>。
-      片方をくわしく知ろうとすると、もう片方がぼやけてしまう――これがハイゼンベルクの不確定性原理。</p>
-      <p style="text-align:center; font-size:1.15rem; margin:16px 0;">
-        📍 位置をくわしく知る &nbsp;→&nbsp; 💨 動きがぼやける<br>
-        💨 動きをくわしく知る &nbsp;→&nbsp; 📍 位置がぼやける
-      </p>
-      <p>これは測定の腕が悪いからではなく、<b>自然そのものがもつ“ぼやけ”</b>。
-      ミクロの世界では「ここに・この速さで」と一点に決めること自体ができないんだ。</p>
-      <div class="point"><b>ポイント：</b>位置と動き（運動量）はセットで“あいまいさ”をもつ。両方を同時に、くっきりとは決められない！</div>
-      <div class="btn-row"><a class="btn btn-primary" href="uncertainty.html">🎮 「不確定性ゲーム」で体験する</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== ルール5：量子もつれ ===== -->
-<section class="section-pad">
-  <div class="wrap">
-    <div class="rule c-purple reveal">
-      <span class="num">5</span>
-      <h3>量子もつれ（エンタングルメント）</h3>
-      <p>2つ以上の電子キャラクターが“もつれる”と、どんなに離れた場所にいても、
-      <b>互いの状態が強く結びつく</b>。</p>
-      <p style="text-align:center; font-size:1.25rem; margin:16px 0;">
-        電子A 🧍 ⸺♾️⸺ 🧍 電子B<br>
-        <span style="font-size:1rem;">Aを ⬆️ と観測すると → Bは ⬇️ に確定！<br>
-        Aを ⬇️ と観測すると → Bは ⬆️ に確定！</span>
-      </p>
-      <div class="point" style="background:var(--purple-soft); border-left-color:var(--purple);">
-        <b style="color:var(--purple);">ポイント：</b>電子の状態は単体では決まっておらず、ペア（全体）の状態として決まっている！</div>
-      <div class="btn-row">
-        <a class="btn btn-primary" href="game.html">🎮 「量子もつれワーム」で体験する</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== ルール5：相互作用 ===== -->
-<section>
-  <div class="wrap">
-    <div class="rule c-red reveal">
-      <span class="num">6</span>
-      <h3>相互作用（情報のやり取り）</h3>
-      <p>電子は光子などの粒子と相互作用して、エネルギーや情報を交換する。</p>
-      <p style="text-align:center; font-size:1.25rem; margin:16px 0;">
-        🧍 電子 ＋ 🌞 光子を吸収 → エネルギーが増える → ⬆️ 別のエネルギー準位へジャンプ！
-      </p>
-      <div class="point" style="background:#fdeaea; border-left-color:var(--red);">
-        <b style="color:var(--red);">ポイント：</b>相互作用によって電子の状態（エネルギー・スピンなど）が変化し、情報がやり取りされる！</div>
-      <div class="btn-row"><a class="btn btn-primary" href="interact.html">🎮 「力の交換」で体験する</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== エントロピーの拡大 ===== -->
-<section class="section-pad">
-  <div class="wrap">
-    <span class="eyebrow">そして宇宙へ</span>
-    <h2 class="section-title">⑦ 相互作用 → もつれの拡大 → エントロピーの増大</h2>
-    <p class="section-sub">相互作用がくり返されると、量子もつれが広がり、情報が宇宙全体に拡散していく。</p>
-    <div class="flow reveal">
-      <div class="flow-step"><span class="emoji">🧍🧍</span><h4>初期</h4><p>関係が少ない</p></div>
-      <div class="flow-arrow">➡</div>
-      <div class="flow-step"><span class="emoji">🧍↔🧍</span><h4>相互作用が増える</h4><p>つながりが生まれる</p></div>
-      <div class="flow-arrow">➡</div>
-      <div class="flow-step"><span class="emoji">🕸️</span><h4>もつれが広がる</h4><p>互いに結びつく</p></div>
-      <div class="flow-arrow">➡</div>
-      <div class="flow-step"><span class="emoji">🌐</span><h4>情報が拡散</h4><p>混ざり合っていく</p></div>
-      <div class="flow-arrow">➡</div>
-      <div class="flow-step"><span class="emoji">❓</span><h4>エントロピー増大</h4><p>乱雑さが増す</p></div>
-    </div>
-    <div class="point" style="margin-top:6px;">
-      <b>大きな流れ：</b>相互作用 → 量子もつれの増加 → 情報の拡散 → エントロピー増大。
-      これが「宇宙の時間の矢印（過去→未来）」の原因のひとつと考えられている。
-    </div>
-  </div>
-</section>
-
-<!-- ===== 確立した理論（場の量子論・標準模型） ===== -->
-<section>
-  <div class="wrap">
-    <span class="eyebrow">ルールの土台</span>
-    <h2 class="section-title">これらのルールを束ねる“確立した理論”</h2>
-    <p class="section-sub">ここまでのルールは、思いつきではなく、実験で何度も確かめられた<b>2つの理論</b>にまとめられているよ。</p>
+    <span class="eyebrow" style="margin-top:30px;">③ 通りやすさのルール</span>
+    <h2 class="section-title">うすい・低い壁ほど、軽い粒子ほど通る</h2>
     <div class="grid">
-      <div class="card reveal" style="border-top:5px solid var(--green);">
-        <span class="icon">🌊</span>
-        <h3>場の量子論（確立）</h3>
-        <p>「粒子」は、空間いっぱいに広がる<b>“場”のゆらぎ</b>。電子は電子場のさざ波、光子は電磁場のさざ波。
-        これまでのルール（重ね合わせ・量子化…）は、この理論の上で成り立っている。実験と桁違いの精度で一致。</p>
-      </div>
-      <div class="card reveal" style="border-top:5px solid var(--green);">
-        <span class="icon">📖</span>
-        <h3>標準模型（確立）</h3>
-        <p>クォーク・レプトン・力のボソン・ヒッグスで、物質と3つの力（電磁・弱・強）をまとめた“完成形”。
-        登場する素粒子は<a href="zukan.html">量子図鑑</a>で紹介。ただし重力だけは、まだこの枠に入らない。</p>
-      </div>
+      <div class="card reveal"><span class="icon">📏</span><h3>壁がうすいほど</h3>
+        <p>しみ出した波が向こうに届きやすい。逆に厚いと、確率は<b>急激に</b>下がる。</p></div>
+      <div class="card reveal"><span class="icon">⛰️</span><h3>壁が低いほど</h3>
+        <p>足りないエネルギーの差が小さいほど、すり抜けやすくなる。</p></div>
+      <div class="card reveal"><span class="icon">🪶</span><h3>軽い粒子ほど</h3>
+        <p>電子のように軽い粒子は波が広がりやすく、よく抜ける。重い物ほど起きにくい。</p></div>
     </div>
-    <div class="point">
-      <b>その先（仮説）：</b>重力まで含めて統一しようとする<b>超弦理論・M理論・ループ量子重力・ホログラフィー</b>は、
-      まだ確かめられていない最先端の挑戦。確立と仮説をまとめて読み比べるなら →
-      <a href="theory.html">こらむ「理論ガイド」</a>へ。
+    <div class="point" style="margin-top:14px;">
+      だから、人がカベに突進しても通り抜けられない。原子レベルでは確率がゼロではないけれど、
+      <b>0が何十桁も続くような“事実上ゼロ”</b>。トンネル効果が目に見えるのは、ミクロの世界だけなんだ。
     </div>
-  </div>
-</section>
 
-<!-- ===== まとめ ===== -->
-<section>
-  <div class="wrap">
-    <div class="summary reveal">
-      <span class="big" data-spr="electron"></span>
-      <p>電子そのものは、いつでも<b>「電子」</b>！　ふしぎで飛び飛びなのは、電子の<b>「状態」</b>のほう。
-      その状態が、観測・相互作用・もつれによって決まり、やがて宇宙全体の姿（時空や情報の広がり）につながっていく。</p>
+    <span class="eyebrow" style="margin-top:30px;">④ じつは大活躍している</span>
+    <h2 class="section-title">太陽も、半導体も、トンネルのおかげ</h2>
+    <div class="grid">
+      <div class="card reveal"><span class="icon">☀️</span><h3>太陽が燃える</h3>
+        <p>太陽の中心でも、陽子どうしは反発の“壁”を越えるには温度が足りない。<b>トンネル効果</b>で壁を抜けて核融合が起き、太陽は輝いている。</p></div>
+      <div class="card reveal"><span class="icon">☢️</span><h3>放射性崩壊</h3>
+        <p>原子核から粒子が飛び出す<b>α崩壊</b>も、核の“壁”をすり抜けて起こる現象だ。</p></div>
+      <div class="card reveal"><span class="icon">💾</span><h3>半導体・メモリ</h3>
+        <p>フラッシュメモリやトンネルダイオードは、トンネル効果を<b>積極的に利用</b>。逆に微細化しすぎると“漏れ”の原因にも。</p></div>
+      <div class="card reveal"><span class="icon">🔬</span><h3>走査トンネル顕微鏡</h3>
+        <p>針と試料の間を流れる<b>トンネル電流</b>で、原子1個1個を“見る”ことができる装置（STM）。</p></div>
+    </div>
+
+    <span class="eyebrow" style="margin-top:30px;">⑤ ふしぎだけど、ルールどおり</span>
+    <h2 class="section-title">「絶対」ではなく「確率」</h2>
+    <p>トンネル効果は、魔法でも反則でもない。<b>粒子が波であり、結果は確率で決まる</b>という量子のルールの、ごく自然な帰結だ。
+    「ぜったい無理」が「ごくまれに起こる」に変わる――ミクロの世界の“もうひとつの常識”だよ。</p>
+
+    <div class="summary reveal" style="margin-top:26px;">
+      <span class="big" data-spr="slime"></span>
+      <p>壁のすり抜け（トンネル効果）は、<b>波が壁にしみ出して、向こう側にわずかに残る</b>から起こる。
+      うすい壁・軽い粒子ほど通りやすく、太陽の輝きや半導体まで支えている。量子が“波”であることの、いちばん劇的な証拠なんだ。</p>
     </div>
     <div class="btn-row">
-      <a class="btn btn-primary" href="history.html">▶ 量子力学の歴史へ</a>
-      <a class="btn btn-ghost" href="zukan.html" style="border-color:var(--line); color:var(--blue);">← 量子図鑑へ</a>
+      <a class="btn btn-primary" href="rules.html">▶ 量子のルールへ</a>
+      <a class="btn btn-ghost" href="uncertainty.html" style="border-color:var(--line); color:var(--blue);">🎮 不確定性であそぶ</a>
     </div>
   </div>
 </section>
