@@ -669,7 +669,7 @@ body{
     <div class="qbar">
       <span class="st">ステージ <span id="st">1</span>/6</span>
       <span class="st" style="color:var(--red)">ミス <span id="miss">0</span></span>
-      <span class="qtoggle"><label><input type="checkbox" id="hint" checked> ヒント</label></span>
+      <span class="qtoggle"><label><input type="checkbox" id="hint"> ヒント</label></span>
       <button class="lab-btn sub" id="reset" style="margin-left:auto">♻ 最初から</button>
     </div>
     <div class="lab-stage"><canvas id="quest" width="600" height="360"></canvas></div>
@@ -1011,80 +1011,75 @@ document.addEventListener('click', () => {
 (function(){
   var cv=document.getElementById('quest'),ctx=cv.getContext('2d');
   var DPR=Math.min(2,window.devicePixelRatio||1),W=600,H=360;cv.width=W*DPR;cv.height=H*DPR;ctx.scale(DPR,DPR);
-  var stages=[
-    {key:'quantize', chip:'🪜 量子化', t:'エネルギーの“段”', d:'決まった段（準位）にしか立てない。中途半端な高さはナシ。この性質は？'},
-    {key:'superpose',chip:'☁️ 重ね合わせ', t:'分かれ道', d:'道が二手に。いまは選ばず“両方に同時に”いたい。どのルール？'},
-    {key:'collapse', chip:'👁 観測', t:'ひとつに確定', d:'重なった状態を、見て1つに決めたい。何をする？'},
-    {key:'uncertain',chip:'📍 不確定性', t:'ぼやけの関所', d:'位置も速さも同時にピタッとは決められない…この“ぼやけ”のルールは？'},
-    {key:'entangle', chip:'🔗 もつれ', t:'遠くの扉', d:'離れた扉を、そばに行かずに開けたい。どのルール？'},
-    {key:'interact', chip:'⚡ 相互作用', t:'光子をキャッチ', d:'光子を受け取ってエネルギーを得て、ゴールへ。どのルール？'}
+  var ALL=[
+    {key:'quantize',chip:'🪜 量子化',t:'エネルギーの“段”',d:'決まった段（準位）にしか立てない。中途半端な高さはナシ。この性質は？'},
+    {key:'superpose',chip:'☁️ 重ね合わせ',t:'分かれ道',d:'道が二手に。いまは選ばず“両方に同時に”いたい。どのルール？'},
+    {key:'collapse',chip:'👁 観測',t:'ひとつに確定',d:'重なった状態を、見て1つに決めたい。何をする？'},
+    {key:'uncertain',chip:'📍 不確定性',t:'ぼやけの関所',d:'位置も速さも同時にピタッとは決められない…この“ぼやけ”のルールは？'},
+    {key:'entangle',chip:'🔗 もつれ',t:'遠くの扉',d:'離れた扉を、そばに行かずに開けたい。どのルール？'},
+    {key:'interact',chip:'⚡ 相互作用',t:'光子をキャッチ',d:'光子を受け取ってエネルギーを得て、ゴールへ。どのルール？'}
   ];
-  var abilList=[
-    {key:'quantize',label:'量子化'},{key:'superpose',label:'重ね合わせ'},{key:'collapse',label:'観測'},
-    {key:'uncertain',label:'不確定性'},{key:'entangle',label:'量子もつれ'},{key:'interact',label:'相互作用'}
-  ];
+  var LABEL={quantize:'量子化',superpose:'重ね合わせ',collapse:'観測',uncertain:'不確定性',entangle:'量子もつれ',interact:'相互作用'};
   var pts=[[64,300],[150,205],[250,285],[352,180],[440,270],[520,175],[566,300]];
-  var cur=0, miss=0, moving=null, done=false, t0=0;
   var chipsEl=document.getElementById('chips'),abilEl=document.getElementById('abil');
   var stEl=document.getElementById('st'),missEl=document.getElementById('miss'),msg=document.getElementById('msg');
   var situT=document.getElementById('situT'),situD=document.getElementById('situD'),hintCb=document.getElementById('hint');
   var best=+(localStorage.getItem('questBest')||0);
-  // build chips
-  chipsEl.innerHTML=''; stages.forEach(function(s,i){ var c=document.createElement('span'); c.className='chip2'; c.id='chip'+i; c.textContent=s.chip; chipsEl.appendChild(c); });
-  // build ability buttons
-  abilEl.innerHTML=''; abilList.forEach(function(a){ var b=document.createElement('button'); b.textContent=a.label; b.setAttribute('data-key',a.key); b.onclick=function(){ pick(a.key,b); }; abilEl.appendChild(b); });
-  function refreshHints(){ var on=hintCb.checked; abilEl.querySelectorAll('button').forEach(function(b){ b.classList.toggle('hi', on && !done && !moving && b.getAttribute('data-key')===stages[cur].key); }); }
+  var stages,cur,miss,moving,done,t0;
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=(Math.random()*(i+1))|0,x=a[i];a[i]=a[j];a[j]=x;}return a;}
+  chipsEl.innerHTML='';ALL.forEach(function(s){var c=document.createElement('span');c.className='chip2';c.id='chip_'+s.key;c.textContent=s.chip;chipsEl.appendChild(c);});
+  function buildAbil(){var order=shuffle(ALL);abilEl.innerHTML='';order.forEach(function(a){var b=document.createElement('button');b.textContent=LABEL[a.key];b.setAttribute('data-key',a.key);b.onclick=function(){pick(a.key);};abilEl.appendChild(b);});}
+  function refreshHints(){var on=hintCb.checked;abilEl.querySelectorAll('button').forEach(function(b){b.classList.toggle('hi',on&&!done&&!moving&&cur<stages.length&&b.getAttribute('data-key')===stages[cur].key);});}
   hintCb.onchange=refreshHints;
-  function showStage(){ if(cur>=stages.length) return; situT.textContent='場面'+(cur+1)+'：'+stages[cur].t; situD.textContent=stages[cur].d; stEl.textContent=(cur+1); refreshHints(); }
-  function pick(key,btn){
-    if(done||moving) return;
-    if(!t0) t0=Date.now();
+  function showStage(){if(cur>=stages.length)return;situT.textContent='場面'+(cur+1)+'：'+stages[cur].t;situD.textContent=stages[cur].d;stEl.textContent=(cur+1);refreshHints();}
+  function pick(key){
+    if(done||moving)return;
+    if(!t0)t0=Date.now();
     if(key===stages[cur].key){
-      document.getElementById('chip'+cur).classList.add('got');
-      msg.textContent='✅ 正解！「'+stages[cur].chip.replace(/^..\s/,'')+'」で切り抜けた！';
+      document.getElementById('chip_'+key).classList.add('got');
+      msg.textContent='✅ 正解！「'+LABEL[key]+'」で切り抜けた！';
+      abilEl.querySelectorAll('button').forEach(function(b){b.classList.remove('hi');});
       moving={from:pts[cur],to:pts[cur+1],p:0};
     } else {
-      miss++; missEl.textContent=miss; msg.textContent='❌ この場面には合わないよ。「'+situT.textContent.split('：')[1]+'」を解決するルールは？';
-      refreshHints();
+      miss++;missEl.textContent=miss;msg.textContent='❌ この場面には合わないよ。「'+stages[cur].t+'」を解決するルールを考えよう。';
     }
   }
   function win(){
-    done=true; var secs=Math.round((Date.now()-t0)/1000);
-    var rank = miss===0 ? '量子マスター👑' : miss<=2 ? '研究者' : '見習い';
-    var scorev = Math.max(1, 100 - miss*10);
-    if(scorev>best){ best=scorev; localStorage.setItem('questBest',best); }
+    done=true;var secs=Math.round((Date.now()-t0)/1000);
+    var rank=miss===0?'量子マスター👑':miss<=2?'研究者':'見習い';
+    var scorev=Math.max(1,100-miss*10);
+    if(scorev>best){best=scorev;localStorage.setItem('questBest',best);}
     document.getElementById('rk2').textContent='ランク：'+rank+'（ミス'+miss+'・'+secs+'秒）';
     document.getElementById('ovmsg').textContent='6つのルールを使い分けて、ミクロ世界をゴールまで踏破した！';
     document.getElementById('ov').classList.add('show');
   }
-  function reset(){ cur=0;miss=0;moving=null;done=false;t0=0;missEl.textContent=0;msg.textContent='場面を読んで、合うルールを選ぼう！';
-    stages.forEach(function(s,i){document.getElementById('chip'+i).classList.remove('got');});
-    document.getElementById('ov').classList.remove('show'); showStage(); }
+  function reset(){
+    stages=shuffle(ALL);buildAbil();cur=0;miss=0;moving=null;done=false;t0=0;missEl.textContent=0;
+    msg.textContent=hintCb.checked?'場面を読んで、合うルールを選ぼう！（ヒントON）':'場面を読んで、合うルールを選ぼう！（分からなければ“ヒント”をON）';
+    ALL.forEach(function(s){document.getElementById('chip_'+s.key).classList.remove('got');});
+    document.getElementById('ov').classList.remove('show');showStage();
+  }
   document.getElementById('reset').onclick=reset;
   document.getElementById('again').onclick=reset;
-  function node(x,y,state){ ctx.beginPath();ctx.arc(x,y,state==='cur'?13:10,0,7);
-    ctx.fillStyle=state==='done'?'#5ad18a':state==='cur'?'#ffd23f':'#33425c'; ctx.fill();
-    if(state==='cur'){ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();} }
+  function node(x,y,state){ctx.beginPath();ctx.arc(x,y,state==='cur'?13:10,0,7);ctx.fillStyle=state==='done'?'#5ad18a':state==='cur'?'#ffd23f':'#33425c';ctx.fill();if(state==='cur'){ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();}}
   function draw(){
     ctx.fillStyle='#0a1730';ctx.fillRect(0,0,W,H);
     ctx.strokeStyle='rgba(120,160,220,.4)';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);
-    for(var i=1;i<pts.length;i++)ctx.lineTo(pts[i][0],pts[i][1]); ctx.stroke();
-    for(var i=0;i<pts.length;i++){ var st=(i<pts.length-1)?(i<cur?'done':i===cur&&!done?'cur':'future'):'goal';
-      if(st==='goal'){ ctx.font='20px sans-serif';ctx.textAlign='center';ctx.fillText('🏁',pts[i][0],pts[i][1]+6); }
-      else node(pts[i][0],pts[i][1],st==='done'?'done':st==='cur'?'cur':'future'); }
-    // electron position
+    for(var i=1;i<pts.length;i++)ctx.lineTo(pts[i][0],pts[i][1]);ctx.stroke();
+    for(var i=0;i<pts.length;i++){
+      if(i===pts.length-1){ctx.font='20px sans-serif';ctx.textAlign='center';ctx.fillText('🏁',pts[i][0],pts[i][1]+6);}
+      else node(pts[i][0],pts[i][1],i<cur?'done':(i===cur&&!done?'cur':'future'));
+    }
     var ex,ey;
-    if(moving){ moving.p+=0.05; var a=moving.from,b=moving.to; var e=moving.p<1?moving.p:1;
-      ex=a[0]+(b[0]-a[0])*e; ey=a[1]+(b[1]-a[1])*e;
-      if(moving.p>=1){ moving=null; cur++; if(cur>=stages.length){ setTimeout(win,150);} else showStage(); } }
-    else { var p=pts[Math.min(cur,pts.length-1)]; ex=p[0]; ey=p[1]; }
+    if(moving){moving.p+=0.05;var a=moving.from,b=moving.to,e=moving.p<1?moving.p:1;ex=a[0]+(b[0]-a[0])*e;ey=a[1]+(b[1]-a[1])*e;
+      if(moving.p>=1){moving=null;cur++;if(cur>=stages.length){setTimeout(win,150);}else showStage();}}
+    else{var p=pts[Math.min(cur,pts.length-1)];ex=p[0];ey=p[1];}
     ctx.fillStyle='#46b0ff';ctx.beginPath();ctx.arc(ex,ey,10,0,7);ctx.fill();
     ctx.fillStyle='#fff';ctx.font='bold 13px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('-',ex,ey);ctx.textBaseline='alphabetic';
     ctx.fillStyle='#9fc4e8';ctx.font='11px sans-serif';ctx.textAlign='left';ctx.fillText('スタート',pts[0][0]-16,pts[0][1]+26);ctx.fillText('ゴール',pts[6][0]-38,pts[6][1]+24);
     requestAnimationFrame(draw);
   }
-  msg.textContent='場面を読んで、合うルールを選ぼう！（ヒントON中）';
-  showStage(); draw();
+  reset();draw();
 })();
 </script>
 </body>
