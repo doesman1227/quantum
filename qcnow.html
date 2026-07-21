@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>不確定性ゲーム（虫かごチャレンジ）｜量子力学</title>
-<meta name="description" content="不確定性原理を体験するゲーム。粒子の位置をしぼる（かごをせまくする）ほど運動量が暴れて逃げやすくなる。ちょうど良い加減を探して、できるだけ長く閉じこめてスコアを伸ばそう。">
+<title>量子コンピュータの現在地｜量子力学</title>
+<meta name="description" content="量子コンピュータの実装と実用化をやさしく解説。超伝導・イオントラップ・中性原子・光・半導体スピン・トポロジカルの6方式比較、量子ビットの正体、主要企業、誤り訂正という最大の壁、物理量子ビットと論理量子ビットの違い、各社ロードマップと普及時期の見立てまで。">
 <style>
 /* =========================================================
    量子力学ふしぎ図鑑  -  共通スタイル
@@ -540,32 +540,21 @@ body{
 
 </style>
 <style>
-.lab-wrap{ max-width:680px; margin:0 auto; }
-.lab-hud{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
-.lab-stat{ flex:1 1 120px; background:var(--window); border:1px solid var(--line); border-radius:10px; padding:9px 14px; box-shadow:var(--shadow); }
-.lab-stat .lab{ font-size:.72rem; color:var(--ink-soft); font-weight:700; }
-.lab-stat .val{ font-family:var(--font-ui),sans-serif; font-size:1.3rem; color:var(--blue-deep); line-height:1.2; }
-.lab-stage{ border-radius:14px; overflow:hidden; border:3px solid var(--blue-deep); box-shadow:var(--shadow-lg); background:#0a1730; }
-.lab-stage canvas{ display:block; width:100%; height:auto; }
-.lab-controls{ display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; align-items:center; }
-.lab-btn{ font-family:var(--font-ui),sans-serif; cursor:pointer; border:none; border-radius:8px; font-size:.9rem; padding:10px 15px; }
-.lab-btn.fire{ background:var(--gold); color:#3a2c00; box-shadow:0 4px 0 #b88a00, inset 0 0 0 2px #fff4cf; }
-.lab-btn.fire:active{ transform:translateY(2px); box-shadow:0 2px 0 #b88a00, inset 0 0 0 2px #fff4cf; }
-.lab-btn.sub{ background:var(--window); color:var(--blue-deep); border:1px solid var(--line); box-shadow:var(--shadow); }
-.lab-btn.on{ outline:3px solid var(--gold); outline-offset:1px; }
-.lab-msg{ margin:12px 0 0; padding:11px 14px; border-radius:10px; font-size:.92rem; background:#eef3fb; border-left:4px solid var(--sky); color:var(--ink); min-height:1.2em; }
-.lab-slider{ display:flex; align-items:center; gap:10px; width:100%; margin-top:4px; }
-.lab-slider input[type=range]{ flex:1; accent-color:var(--blue); }
-.lab-slider .cap{ font-size:.8rem; color:var(--ink-soft); white-space:nowrap; }
-.playguide{ background:#eef6ff; border:1px solid var(--sky); border-radius:12px; padding:13px 16px; margin:0 0 16px; }
-.playguide .goal{ font-weight:800; color:var(--blue-deep); }
-.playguide ol{ margin:6px 0 0; padding-left:1.3em; font-size:.9rem; color:var(--ink); }
-.playguide li{ margin:1px 0; }
-.goal-banner{ font-family:var(--font-ui),sans-serif; font-weight:800; color:#b07d00; background:#fffaf0;
-  border:1px solid #f0dca8; border-radius:10px; padding:9px 14px; margin:0 0 12px; }
-.learnbox{ margin:16px 0 0; padding:12px 16px; border-radius:10px; background:var(--green-soft);
-  border-left:4px solid var(--green); font-size:.92rem; }
-.learnbox a{ font-weight:700; }
+.qtable{ width:100%; border-collapse:collapse; background:var(--window); border-radius:12px;
+  overflow:hidden; box-shadow:var(--shadow); font-size:.88rem; }
+.qtable th,.qtable td{ border:1px solid var(--line); padding:9px 11px; text-align:left; vertical-align:top; }
+.qtable th{ background:var(--bg-deep); color:var(--blue-deep); white-space:nowrap; }
+.qtable td.m{ font-weight:800; color:var(--blue-deep); white-space:nowrap; }
+.freshness{ background:#fffaf0; border:1px solid #f0dca8; border-left:5px solid var(--gold);
+  border-radius:12px; padding:12px 16px; margin:0 0 20px; font-size:.9rem; }
+.freshness b{ color:#b07d00; }
+.qstep{ display:grid; gap:10px; margin-top:10px; }
+.qsrow{ display:flex; gap:12px; align-items:flex-start; background:var(--window); border:1px solid var(--line);
+  border-radius:12px; padding:13px 16px; box-shadow:var(--shadow); }
+.qsnum{ flex:0 0 auto; width:26px; height:26px; border-radius:50%; background:var(--sky); color:#fff;
+  font-weight:800; font-size:.8rem; display:flex; align-items:center; justify-content:center; margin-top:2px; }
+.qsrow h4{ margin:0 0 2px; color:var(--blue-deep); font-size:1rem; }
+.qsrow p{ margin:0; font-size:.9rem; color:var(--ink-soft); }
 </style>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔵</text></svg>">
 </head>
@@ -574,7 +563,7 @@ body{
 <header class="site-header">
   <nav class="nav">
     <a class="brand" href="index.html"><span class="slime" data-spr="slime"></span> 量子力学<span style="opacity:.55;font-weight:400;font-size:.72em;letter-spacing:.02em"> ／ まとめノート</span></a>
-<div class="nav-links">
+                                <div class="nav-links">
       <a href="index.html">ホーム</a>
       <div class="nav-group">
         <button type="button" class="nav-trigger">まなぶ ▾</button>
@@ -629,31 +618,107 @@ body{
 
 <section class="hero" style="padding:48px 0 56px;">
   <div class="wrap">
-    <span class="tier tier-play">あそぶ</span><br>
-    <span class="eyebrow">あそぶ ・ ルール④ 不確定性原理</span>
-    <h1 style="font-size:clamp(1.6rem,4.5vw,2.6rem);">虫かごチャレンジ</h1>
-    <p class="lead">位置を“ぎゅっ”としぼるほど、運動量が暴れて粒子は逃げ回る。せまいかごほど高得点、でも逃げられやすい――不確定性原理をジレンマとして体感しよう。</p>
+    <span class="tier tier-adv">コラム</span><br>
+    <span class="eyebrow">こらむ ・ もっと知りたい</span>
+    <h1 style="font-size:clamp(1.6rem,4.5vw,2.6rem);">量子コンピュータの現在地</h1>
+    <p class="lead">何で作られていて、誰が開発していて、何が壁で、いつ使えるようになるのか。
+    「仕組み」の一歩先、<b>実機のリアル</b>をのぞいてみよう。</p>
   </div>
 </section>
 
 <section class="section-pad">
-  <div class="wrap lab-wrap">
-<div class="playguide reveal"><div class="goal">🎯 目的：かごの中に、あばれる粒子をできるだけ長く閉じこめろ！</div><ol><li>「スタート」でチャレンジ開始</li><li>スライダーでかごの大きさを調整</li><li>かごをせまくするほど高得点…でも粒子が暴れて逃げる</li><li>逃げられたら終了。スコアを更新しよう</li></ol></div>
-    <div class="lab-hud">
-      <div class="lab-stat"><div class="lab">スコア</div><div class="val" id="score">0</div></div>
-      <div class="lab-stat"><div class="lab">最高記録</div><div class="val" id="best">0</div></div>
-      <div class="lab-stat"><div class="lab">Δx（位置）</div><div class="val" id="dx">–</div></div>
-      <div class="lab-stat"><div class="lab">Δp（あばれ）</div><div class="val" id="dp">–</div></div>
+  <div class="wrap">
+    <div class="freshness">
+      <b>⏱ この記事の情報は 2026年7月時点</b>です。量子コンピュータは動きがとても速い分野なので、
+      台数・記録・時期の見通しは<b>すぐ変わります</b>。最新の数字は各社の公表資料でご確認ください。
     </div>
-    <div class="lab-stage"><canvas id="uq" width="600" height="340"></canvas></div>
-    <div class="lab-controls" style="flex-direction:column; align-items:stretch;">
-      <div class="lab-slider"><span class="cap">せまい（高得点・危険）</span>
-        <input id="cage" type="range" min="22" max="120" step="1" value="80">
-        <span class="cap">ひろい（安全）</span></div>
-      <div><button class="lab-btn fire" id="start">▶ スタート / リトライ</button></div>
+
+    <div class="answer reveal">
+      <span class="verdict">ひとことで：原理は実証済み。いまは「大きく・正確に作る」工学との闘い。</span>
+      <p><a href="compute.html">仕組み</a>のページで見たとおり、量子コンピュータの原理はもう分かっている。
+      問題は<b>「壊れやすい量子ビットを、たくさん・正確に並べられるか」</b>。ここが実用化の本丸なんだ。</p>
     </div>
-    <p class="lab-msg" id="msg"></p>
-    <div class="learnbox">いま体験したルール：<b>不確定性原理</b>。位置をしぼる（かごをせまく）ほど運動量が大きくバラついて暴れる。位置と運動量は同時にきっちり決められない。 → <a href="rules.html">量子のルールでくわしく</a></div>
+
+    <span class="eyebrow" style="margin-top:30px;">① 何で作る？</span>
+    <h2 class="section-title">量子ビットの“正体”は、方式でぜんぜん違う</h2>
+    <div class="point" style="margin-bottom:16px;">
+      <b>よくある誤解：</b>「量子ビット＝素粒子1個」とは限らない。たとえば主流の<b>超伝導方式</b>では、
+      回路を流れる<b>莫大な数の電子が集団で1つの量子状態</b>をつくる（マクロな量子現象）。
+      一方で光方式は本物の<b>光子</b>、スピン方式は<b>電子1個</b>。「どんな素粒子を使うの？」の答えは、<b>方式によって違う</b>んだ。
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="qtable">
+        <tr><th>方式</th><th>量子ビットの正体</th><th>動作温度</th><th>強み</th><th>課題</th><th>主なプレイヤー</th></tr>
+        <tr><td class="m">超伝導</td><td>超伝導回路を流れる電流の重ね合わせ（電子の集団）</td><td>約0.01K</td><td>高速・技術が成熟</td><td>大型冷凍機、コヒーレンス時間が短い</td><td>IBM・Google・IQM・富士通</td></tr>
+        <tr><td class="m">イオントラップ</td><td>電場で捕まえたイオン（原子）のエネルギー準位</td><td>ほぼ常温（真空中）</td><td>精度が非常に高い・長寿命</td><td>動作が遅い、装置が大型</td><td>IonQ・Quantinuum</td></tr>
+        <tr><td class="m">中性原子</td><td>レーザーで並べた中性原子</td><td>ほぼ常温（真空中）</td><td>数を増やしやすい</td><td>レーザー制御が複雑</td><td>QuEra・Pasqal・Infleqtion</td></tr>
+        <tr><td class="m">光（フォトニック）</td><td>光子の偏光や位相</td><td>常温動作が可能</td><td>ノイズに強い・常温</td><td>光の損失、素子づくり</td><td>PsiQuantum・Xanadu</td></tr>
+        <tr><td class="m">半導体スピン</td><td>電子1個のスピン（上向き／下向き）</td><td>極低温</td><td>既存の半導体技術を活かせる</td><td>微細な制御が難しい</td><td>Intel・Silicon Quantum Computing</td></tr>
+        <tr><td class="m">トポロジカル</td><td>特殊な準粒子の“編み込み方”</td><td>極低温</td><td>理論上エラーに強い</td><td>実証がまだ途上</td><td>Microsoft</td></tr>
+      </table>
+    </div>
+    <p class="note" style="margin-top:10px;">※どれが勝つかはまだ決着していない。方式ごとに得意・不得意があり、各社が並行して開発中。</p>
+
+    <span class="eyebrow" style="margin-top:34px;">② 最大の壁</span>
+    <h2 class="section-title">「量子ビットの数」より「正確さ」が効く</h2>
+    <p>ニュースでは「◯◯量子ビット達成！」が目立つけれど、専門家がより重視するのは<b>正確さ（忠実度）</b>と
+    <b>誤り訂正</b>のほう。理由はこうだ。</p>
+    <div class="qstep">
+      <div class="qsrow"><span class="qsnum">1</span>
+        <div><h4>量子ビットは、とても壊れやすい</h4>
+        <p>まわりの熱や振動と少し関わるだけで重ね合わせが壊れる（<a href="observer.html">デコヒーレンス</a>）。</p></div></div>
+      <div class="qsrow"><span class="qsnum">2</span>
+        <div><h4>1回の操作ミスは小さくても、積み重なる</h4>
+        <p>最高峰でも1操作あたりの誤りは0.01%程度（忠実度99.99%級）。何百万回も操作すれば、誤りは必ず表に出る。</p></div></div>
+      <div class="qsrow"><span class="qsnum">3</span>
+        <div><h4>だから「誤り訂正」でごまかす</h4>
+        <p><b>たくさんの物理量子ビットを束ねて、壊れにくい“論理量子ビット1個”を作る</b>。ここが勝負どころ。</p></div></div>
+      <div class="qsrow"><span class="qsnum">4</span>
+        <div><h4>結果、必要な数がケタ違いに増える</h4>
+        <p>IBMが公表した構想では、<b>約1万個の物理量子ビットで約200個の論理量子ビット</b>。数十倍の“のりしろ”が要る。</p></div></div>
+    </div>
+    <div class="point" style="margin-top:14px;">
+      <b>読み解きのコツ：</b>発表を見たら<b>「それは物理量子ビット？ 論理量子ビット？」</b>を確認しよう。
+      同じ「100量子ビット」でも、意味の重みがまったく違う。
+    </div>
+
+    <span class="eyebrow" style="margin-top:34px;">③ いまどこまで来た？</span>
+    <h2 class="section-title">2026年、誤り訂正が“実験”から“工学”へ</h2>
+    <p>2026年に入り、複数の企業が<b>論理量子ビットを数十〜100規模</b>で動かしたと発表している（たとえばQuEraは100論理量子ビット到達を公表）。
+    忠実度でも、イオントラップや半導体スピンの一部が<b>99.99%級</b>に達したと報告されている。
+    「誤り訂正は原理的に可能」から「どう量産するか」へ、話題の中心が移りつつある段階だ。</p>
+
+    <span class="eyebrow" style="margin-top:34px;">④ いつ頃、使えるようになる？</span>
+    <h2 class="section-title">各社の目標と、慎重な見立て</h2>
+    <div class="kvp reveal">
+      <div class="k"><b>📅 公表されているロードマップ</b>
+        <p>IBMは<b>2029年</b>に大規模な誤り訂正機「Starling」（約200論理量子ビット／約1万物理量子ビット）、
+        <b>2033年</b>に10万量子ビット規模を目標に掲げている。他社もそれぞれ独自の目標を公表中。</p></div>
+      <div class="k"><b>🤔 慎重な見立て</b>
+        <p>「広く実用的に使える」段階までは<b>2030年代</b>とする見方が多い。
+        経済効果の試算（マッキンゼーは2035年までに最大2兆ドル規模と試算）も、<b>大規模な誤り訂正の達成が前提</b>だ。</p></div>
+    </div>
+    <div class="point" style="margin-top:14px;">
+      <b>注意：</b>ロードマップは<b>企業の“目標”</b>であって、達成が約束されたものではない。
+      過去にも前倒し・後ろ倒しは何度も起きている。数字は「現時点の見通し」として受け取ろう。
+    </div>
+
+    <span class="eyebrow" style="margin-top:34px;">⑤ 今日の立ち位置</span>
+    <h2 class="section-title">「まだPCの置き換えではない」</h2>
+    <p>いま動いている多くの実機は、誤り訂正が完全でない<b>中規模ノイズあり量子計算機（NISQ）</b>と呼ばれる段階。
+    材料・化学の小さなシミュレーション、最適化の研究、アルゴリズムの検証などに使われている。
+    <b>手元のパソコンやスマホを置き換えるものではなく</b>、古典コンピュータが苦手な特定問題を助ける“特殊な相棒”として育っているところだ。</p>
+
+    <div class="summary reveal" style="margin-top:26px;">
+      <span class="big" data-spr="slime"></span>
+      <p>量子コンピュータは<b>「原理の勝負」から「工学の勝負」へ</b>移った。
+      カギは量子ビットの数そのものより、<b>正確さと誤り訂正</b>。ニュースを見るときは
+      「物理か論理か」「目標か実績か」を意識すると、話がぐっと正しく読めるようになるよ。</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="compute.html">▶ 仕組み（なぜ速い？）へ</a>
+      <a class="btn btn-ghost" href="apply.html" style="border-color:var(--line); color:var(--blue);">🔧 実世界の応用へ</a>
+    </div>
   </div>
 </section>
 
@@ -970,36 +1035,6 @@ document.addEventListener('click', () => {
   document.querySelectorAll('.nav-group.open').forEach((g) => g.classList.remove('open'));
 });
 
-</script>
-
-<script>
-(function(){
-  var cv=document.getElementById('uq'),ctx=cv.getContext('2d');
-  var DPR=Math.min(2,window.devicePixelRatio||1),W=600,H=340;cv.width=W*DPR;cv.height=H*DPR;ctx.scale(DPR,DPR);
-  var slider=document.getElementById('cage');
-  var sScore=document.getElementById('score'),sBest=document.getElementById('best'),sDx=document.getElementById('dx'),sDp=document.getElementById('dp'),msg=document.getElementById('msg');
-  var cx=W/2,cy=H/2,best=+(localStorage.getItem('uqBest')||0);sBest.textContent=best;
-  var playing=false,score=0,px=cx,py=cy;
-  function gauss(){var u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(6.283*v);}
-  document.getElementById('start').onclick=function(){playing=true;score=0;px=cx;py=cy;msg.textContent='かごをせまくすると高得点！でも暴れて逃げるよ。';};
-  function draw(){
-    var W2=parseFloat(slider.value);
-    sDx.textContent=Math.round(W2*2);sDp.textContent=Math.round(900/W2);
-    ctx.fillStyle='#0a1730';ctx.fillRect(0,0,W,H);
-    ctx.strokeStyle=playing?'#7fd0c4':'#56708f';ctx.lineWidth=3;ctx.strokeRect(cx-W2,cy-W2,W2*2,W2*2);
-    if(playing){
-      var jit=340/W2; px+=gauss()*jit;py+=gauss()*jit;
-      score+=Math.round(120/W2)+1;sScore.textContent=score;
-      if(px<cx-W2||px>cx+W2||py<cy-W2||py>cy+W2){playing=false;
-        if(score>best){best=score;localStorage.setItem('uqBest',best);}sBest.textContent=best;
-        msg.textContent='💥 逃げられた！ スコア '+score+'。せますぎると運動量が暴れる＝不確定性原理。';}
-    }
-    ctx.fillStyle='#46b0ff';ctx.beginPath();ctx.arc(px,py,8,0,7);ctx.fill();
-    if(!playing){ctx.fillStyle='#9fc4e8';ctx.font='13px sans-serif';ctx.textAlign='center';ctx.fillText('「スタート」でチャレンジ！',cx,cy-W2-12);ctx.textAlign='left';}
-    requestAnimationFrame(draw);
-  }
-  msg.textContent='「スタート」を押して、かごの大きさを調整しよう。';draw();
-})();
 </script>
 </body>
 </html>
