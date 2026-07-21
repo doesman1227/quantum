@@ -14,7 +14,12 @@
       "Bash(git -c user.name=quantum-zukan -c user.email=doesman1227@gmail.com commit -q -m ' *)",
       "Bash(git push *)",
       "Bash(python3 _build_tunneling.py)",
-      "Bash(python3 _build_quest.py)"
+      "Bash(python3 _build_quest.py)",
+      "Bash(git stash *)",
+      "Bash(git remote *)",
+      "Bash(echo \"新リモート: $\\(git remote get-url origin\\)\")",
+      "Bash(gh api *)",
+      "Bash(python3 _rebuild_theory.py)"
     ]
   }
 }

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>量子力学｜まとめノート</title>
-<meta name="description" content="量子力学を、日常とは違う“ミクロの世界のルール”として、やさしく・体験して学べるサイト。重ね合わせ・観測・もつれなどの不思議なルールから、ゲームで体感する実験、そして相対論・場の量子論・標準模型・超弦理論の関係が一目で分かる「理論の地図」まで。">
+<meta name="description" content="量子力学を、日常とは違う“ミクロの世界のルール”として、やさしく・体験して学べるサイト。重ね合わせ・観測・もつれなどの不思議なルールから、ゲームで体感する実験、最前線のコラムまで。">
 <style>
 /* =========================================================
    量子力学ふしぎ図鑑  -  共通スタイル
@@ -575,24 +575,6 @@ body{
   .vsrow .qm::before{ content:"⚛️ ミクロ："; color:var(--blue); font-weight:700; }
 }
 
-/* ホーム：理論の地図（枠組み と 具体的な理論） */
-.dogbox{ background:#fffaf0; border:1px solid #f0dca8; border-left:5px solid var(--gold);
-  border-radius:12px; padding:15px 18px; margin-bottom:20px; }
-.dogbox .dogline{ font-weight:800; color:#8a6400; margin-bottom:4px; }
-.dogbox p{ margin:0; font-size:.94rem; }
-.tmap{ display:grid; gap:9px; }
-.trow{ display:flex; gap:12px; align-items:flex-start; background:var(--window);
-  border:1px solid var(--line); border-radius:12px; padding:13px 16px; box-shadow:var(--shadow); }
-.trow.ind1{ margin-left:20px; } .trow.ind2{ margin-left:40px; }
-.tg{ flex:0 0 auto; font-size:.7rem; font-weight:800; border-radius:999px;
-  padding:3px 10px; white-space:nowrap; margin-top:3px; }
-.tg.fw{ background:#e8f2ff; color:#2b6cb0; }
-.tg.cc{ background:var(--green-soft); color:#1f7a4d; }
-.tg.ch{ background:var(--orange-soft); color:#b35c12; }
-.trow h4{ margin:0 0 2px; color:var(--blue-deep); font-size:1rem; }
-.trow p{ margin:0; font-size:.88rem; color:var(--ink-soft); }
-.tarrow{ margin-left:26px; color:var(--sky); font-weight:800; font-size:.85rem; }
-@media (max-width:520px){ .trow.ind1{ margin-left:10px; } .trow.ind2{ margin-left:20px; } }
 </style>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔵</text></svg>">
 </head>
@@ -824,68 +806,6 @@ body{
 </section>
 
 
-
-<!-- ============ 理論の地図 ============ -->
-<section id="map">
-  <div class="wrap">
-    <span class="eyebrow">STEP 4 ・ 理論の地図</span>
-    <h2 class="section-title">よく聞く「○○理論」、どういう関係？</h2>
-    <p class="section-sub">相対論・場の量子論・標準模型・超弦理論…。名前が並ぶと混乱しがちだけど、じつは<b>“レベル”がちがうだけ</b>なんだ。</p>
-
-    <div class="dogbox reveal">
-      <div class="dogline">🐕 「犬」と「チワワ」を同列に並べたら、変だよね。</div>
-      <p>チワワは<b>犬の一種</b>。物理の理論も同じで、<b>大きな枠組み</b>と、その枠組みで書かれた<b>具体的な1つの理論</b>が、
-      ごちゃまぜに語られている。「量子力学 vs 標準模型」みたいな比べ方は、じつは「犬 vs チワワ」なんだ。</p>
-    </div>
-
-    <div class="tmap reveal">
-      <div class="trow">
-        <span class="tg fw">枠組み</span>
-        <div><h4>量子力学</h4><p>ミクロの世界のルール。このサイトの主役。</p></div>
-      </div>
-      <div class="trow">
-        <span class="tg fw">枠組み</span>
-        <div><h4>相対論</h4><p>とても速い・とても重いものの世界のルール。</p></div>
-      </div>
-      <div class="tarrow">↓ この2つを合体させると…</div>
-      <div class="trow ind1">
-        <span class="tg fw">枠組み</span>
-        <div><h4>場の量子論</h4><p>量子力学＋特殊相対論。「粒子＝場のさざ波」という見方。</p></div>
-      </div>
-      <div class="tarrow">↓ その中の“力を対称性で書く”タイプが…</div>
-      <div class="trow ind2">
-        <span class="tg fw">枠組み</span>
-        <div><h4>ゲージ理論</h4><p>力のはたらき方を「対称性」から導くタイプの場の量子論。</p></div>
-      </div>
-      <div class="tarrow">↓ その具体的な1つが…</div>
-      <div class="trow ind2">
-        <span class="tg cc">具体的な理論</span>
-        <div><h4>標準模型 ＝ いわば“チワワ”</h4><p>素粒子と3つの力をまとめた、実験で確かめられた“いまの決定版”。</p></div>
-      </div>
-    </div>
-
-    <div class="tmap reveal" style="margin-top:18px;">
-      <div class="trow">
-        <span class="tg ch">未解決の目標</span>
-        <div><h4>量子重力</h4><p>重力だけが、まだ量子のことばで書けていない。そこを埋めるのが目標。</p></div>
-      </div>
-      <div class="tarrow">↓ その“候補”として提案されているのが…</div>
-      <div class="trow ind1">
-        <span class="tg ch">候補（仮説）</span>
-        <div><h4>超弦理論 ／ ループ量子重力</h4><p>まだ実験で確かめられていない、挑戦中のアイデア。</p></div>
-      </div>
-      <div class="trow ind1">
-        <span class="tg ch">候補（仮説）</span>
-        <div><h4>大統一理論</h4><p>標準模型の3つの力を、さらに1つにまとめようという案。</p></div>
-      </div>
-    </div>
-
-    <div class="point" style="margin-top:20px;">
-      <b>ここがポイント：</b>ニュースで「新理論」と聞いたら、まず<b>「これは“枠組み”の話？ それとも“具体的な1つ”の話？」</b>と考えてみよう。
-      それだけで、話の位置づけがスッと分かるようになる。各理論のくわしい中身は「<a href="theory.html">理論ガイド</a>」へ。
-    </div>
-  </div>
-</section>
 
 <footer class="site-footer">
   <div class="wrap">
