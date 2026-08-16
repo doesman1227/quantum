@@ -615,6 +615,7 @@ body{
           <a href="rules.html">量子のルール</a>
           <a href="apply.html">実世界の応用</a>
           <a href="history.html">量子力学の歴史</a>
+          <a href="theory.html">理論ガイド</a>
         </div>
       </div>
       <div class="nav-group">
@@ -686,65 +687,82 @@ body{
     <h2 class="section-title">どれが「枠組み」で、どれが「具体的な1つ」？</h2>
     <p class="section-sub">上にいくほど大きな枠組み、下にいくほど具体的。インデントは「その中に含まれる」を表しているよ。</p>
 
-    <!-- 一枚で見る全体図 -->
+    <!-- 一枚で見る全体図（ホワイトボード版） -->
     <div class="bigmap reveal">
-      <svg viewBox="0 0 720 492" role="img" aria-label="物理理論の全体図：特殊相対論と量子力学から場の量子論・ゲージ理論・標準模型へ、そして未解決の大統一理論・量子重力へ">
+      <svg viewBox="0 0 760 600" role="img" aria-label="物理理論の全体図：ニュートン力学から特殊相対論・量子力学、場の量子論、ゲージ理論、標準模型へ。別ルートの一般相対論とあわせて未解決の量子重力・ホログラフィへ。下ほど基本的な土台。">
         <defs>
-          <marker id="arB" markerWidth="9" markerHeight="9" refX="6.5" refY="4" orient="auto">
-            <path d="M0 0 L8 4 L0 8 Z" fill="#4aa3df"/>
-          </marker>
-          <marker id="arP" markerWidth="9" markerHeight="9" refX="6.5" refY="4" orient="auto">
-            <path d="M0 0 L8 4 L0 8 Z" fill="#805ad5"/>
-          </marker>
+          <marker id="arB" markerWidth="9" markerHeight="9" refX="6.5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#4aa3df"/></marker>
+          <marker id="arP" markerWidth="9" markerHeight="9" refX="6.5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#805ad5"/></marker>
+          <marker id="arG" markerWidth="9" markerHeight="9" refX="6.5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#9aa7b4"/></marker>
+          <marker id="arT" markerWidth="9" markerHeight="9" refX="6.5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#2f9e8f"/></marker>
         </defs>
         <g font-family="'Zen Maru Gothic','Hiragino Maru Gothic ProN',sans-serif" text-anchor="middle">
-          <!-- 土台の2枠組み -->
-          <rect x="40"  y="20" width="290" height="54" rx="10" fill="#eaf4fc" stroke="#4aa3df" stroke-width="2"/>
-          <text x="185" y="45" font-size="21" fill="#1e3a5f">特殊相対論</text>
-          <text x="185" y="64" font-size="12.5" fill="#5a6b7b">枠組み ・ 速い / 重い世界</text>
-          <rect x="390" y="20" width="290" height="54" rx="10" fill="#eaf4fc" stroke="#4aa3df" stroke-width="2"/>
-          <text x="535" y="45" font-size="21" fill="#1e3a5f">量子力学</text>
-          <text x="535" y="64" font-size="12.5" fill="#5a6b7b">枠組み ・ ミクロの世界</text>
+          <!-- 左：土台の軸 -->
+          <line x1="34" y1="40" x2="34" y2="556" stroke="#c2ccd6" stroke-width="3" marker-end="url(#arG)"/>
+          <text transform="rotate(-90 22 300)" x="22" y="300" font-size="12.5" fill="#7f8b99">下ほど 基本・土台（上は近似として生まれる）</text>
+
+          <!-- 古典：ニュートン力学 -->
+          <rect x="250" y="16" width="270" height="50" rx="10" fill="#eef1f5" stroke="#9aa7b4" stroke-width="2"/>
+          <text x="385" y="40" font-size="18" fill="#48566b">ニュートン力学</text>
+          <text x="385" y="58" font-size="11.5" fill="#5a6b7b">古典 ・ ma＝F ・ 1687（日常スケールの近似）</text>
+          <path d="M385 66 L385 84" fill="none" stroke="#9aa7b4" stroke-width="2" marker-end="url(#arG)"/>
+          <text x="512" y="80" font-size="11" fill="#7f8b99">↓ より基本の理論へ（小さく・速く）</text>
+
+          <!-- 1900年代の2枠組み -->
+          <rect x="70"  y="86" width="280" height="54" rx="10" fill="#eaf4fc" stroke="#4aa3df" stroke-width="2"/>
+          <text x="210" y="112" font-size="18" fill="#1e3a5f">特殊相対性理論</text>
+          <text x="210" y="130" font-size="11.5" fill="#5a6b7b">枠組み ・ 1905 ・ 速い / 重い</text>
+          <rect x="440" y="86" width="280" height="54" rx="10" fill="#eaf4fc" stroke="#4aa3df" stroke-width="2"/>
+          <text x="580" y="112" font-size="18" fill="#1e3a5f">量子力学</text>
+          <text x="580" y="130" font-size="11.5" fill="#5a6b7b">枠組み ・ 1920s ・ ミクロの世界</text>
           <!-- 合体 -->
-          <path d="M185 74 L350 112" fill="none" stroke="#4aa3df" stroke-width="2" marker-end="url(#arB)"/>
-          <path d="M535 74 L370 112" fill="none" stroke="#4aa3df" stroke-width="2" marker-end="url(#arB)"/>
-          <text x="360" y="102" font-size="12" fill="#2b6cb0">＋ 合体すると</text>
+          <path d="M210 140 L360 182" fill="none" stroke="#4aa3df" stroke-width="2" marker-end="url(#arB)"/>
+          <path d="M580 140 L400 182" fill="none" stroke="#4aa3df" stroke-width="2" marker-end="url(#arB)"/>
+          <text x="385" y="170" font-size="12" fill="#2b6cb0">＋ 合体すると</text>
           <!-- 場の量子論 -->
-          <rect x="210" y="116" width="300" height="56" rx="10" fill="#eaf4fc" stroke="#4aa3df" stroke-width="2"/>
-          <text x="360" y="142" font-size="21" fill="#1e3a5f">場の量子論</text>
-          <text x="360" y="161" font-size="12.5" fill="#5a6b7b">枠組み ＝ 量子力学 ＋ 特殊相対論</text>
-          <path d="M360 172 L360 196" fill="none" stroke="#4aa3df" stroke-width="2" marker-end="url(#arB)"/>
+          <rect x="230" y="184" width="300" height="56" rx="10" fill="#eaf4fc" stroke="#4aa3df" stroke-width="2"/>
+          <text x="380" y="210" font-size="20" fill="#1e3a5f">場の量子論</text>
+          <text x="380" y="229" font-size="11.5" fill="#5a6b7b">枠組み ＝ 量子力学＋特殊相対論 ・ 1930〜60s</text>
+          <path d="M380 240 L380 262" fill="none" stroke="#4aa3df" stroke-width="2" marker-end="url(#arB)"/>
           <!-- ゲージ理論 -->
-          <rect x="210" y="198" width="300" height="56" rx="10" fill="#eaf4fc" stroke="#4aa3df" stroke-width="2"/>
-          <text x="360" y="224" font-size="21" fill="#1e3a5f">ゲージ理論</text>
-          <text x="360" y="243" font-size="12.5" fill="#5a6b7b">枠組み ＝ 力を「対称性」から導く</text>
-          <path d="M360 254 L360 278" fill="none" stroke="#4aa3df" stroke-width="2" marker-end="url(#arB)"/>
+          <rect x="230" y="262" width="300" height="52" rx="10" fill="#eaf4fc" stroke="#4aa3df" stroke-width="2"/>
+          <text x="380" y="286" font-size="19" fill="#1e3a5f">ゲージ理論</text>
+          <text x="380" y="304" font-size="11.5" fill="#5a6b7b">枠組み ＝ 力を「対称性」から導く</text>
+          <path d="M380 314 L380 336" fill="none" stroke="#4aa3df" stroke-width="2" marker-end="url(#arB)"/>
           <!-- 標準模型 -->
-          <rect x="210" y="280" width="300" height="60" rx="10" fill="#e6f4ec" stroke="#38a169" stroke-width="2"/>
-          <text x="360" y="307" font-size="21" fill="#1f7a4d">標準模型</text>
-          <text x="360" y="326" font-size="12.5" fill="#5a6b7b">✅ 確立 ・ その中の具体的な1つ</text>
+          <rect x="230" y="336" width="300" height="56" rx="10" fill="#e6f4ec" stroke="#38a169" stroke-width="2"/>
+          <text x="380" y="362" font-size="20" fill="#1f7a4d">標準模型</text>
+          <text x="380" y="380" font-size="11.5" fill="#5a6b7b">✅ 確立 ・ 具体的な1つ ・ 2012 ヒッグス</text>
+          <!-- 右：一般相対論（重力の別ルート） -->
+          <rect x="560" y="184" width="180" height="56" rx="10" fill="#eaf4fc" stroke="#4aa3df" stroke-width="2"/>
+          <text x="650" y="209" font-size="15" fill="#1e3a5f">一般相対性理論</text>
+          <text x="650" y="227" font-size="11" fill="#5a6b7b">枠組み ・ 1915 ・ 重力</text>
+          <path d="M650 240 C642 330 600 386 548 428" fill="none" stroke="#805ad5" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arP)"/>
+          <text x="662" y="330" font-size="11" fill="#805ad5">重力を量子化</text>
           <!-- 仕切り -->
-          <line x1="40" y1="370" x2="680" y2="370" stroke="#c9b8e6" stroke-width="1.5" stroke-dasharray="6 4"/>
-          <rect x="238" y="360" width="244" height="20" rx="10" fill="#ffffff"/>
-          <text x="360" y="374" font-size="12.5" fill="#805ad5">▼ ここから先は挑戦中（まだ仮説）</text>
-          <!-- 分岐 -->
-          <path d="M300 340 L185 402" fill="none" stroke="#805ad5" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arP)"/>
-          <path d="M420 340 L535 402" fill="none" stroke="#805ad5" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arP)"/>
-          <!-- 大統一理論 -->
-          <rect x="40"  y="406" width="290" height="64" rx="10" fill="#efeafc" stroke="#805ad5" stroke-width="2" stroke-dasharray="5 3"/>
-          <text x="185" y="433" font-size="20" fill="#5b3ba8">大統一理論</text>
-          <text x="185" y="453" font-size="12.5" fill="#5a6b7b">仮説 ・ 3つの力を1つに</text>
+          <line x1="60" y1="414" x2="742" y2="414" stroke="#c9b8e6" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <rect x="246" y="404" width="268" height="20" rx="10" fill="#ffffff"/>
+          <text x="380" y="418" font-size="12.5" fill="#805ad5">▼ ここから先は未解決・挑戦中</text>
           <!-- 量子重力 -->
-          <rect x="390" y="406" width="290" height="64" rx="10" fill="#efeafc" stroke="#805ad5" stroke-width="2" stroke-dasharray="5 3"/>
-          <text x="535" y="433" font-size="20" fill="#5b3ba8">量子重力</text>
-          <text x="535" y="453" font-size="12.5" fill="#5a6b7b">仮説 ・ 重力を量子に（超弦 / M / LQG）</text>
+          <path d="M380 392 L374 430" fill="none" stroke="#805ad5" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arP)"/>
+          <rect x="190" y="430" width="360" height="58" rx="10" fill="#efeafc" stroke="#805ad5" stroke-width="2" stroke-dasharray="5 3"/>
+          <text x="370" y="457" font-size="20" fill="#5b3ba8">量子重力</text>
+          <text x="370" y="476" font-size="11.5" fill="#5a6b7b">未解決 ・ 重力を量子に（超弦 / M理論 / LQG）</text>
+          <path d="M370 488 L370 510" fill="none" stroke="#2f9e8f" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arT)"/>
+          <!-- ホログラフィ・情報 -->
+          <rect x="200" y="510" width="340" height="56" rx="10" fill="#e6f6f3" stroke="#2f9e8f" stroke-width="2"/>
+          <text x="370" y="536" font-size="16" fill="#1d7d70">ホログラフィ ・ 量子情報</text>
+          <text x="370" y="554" font-size="11.5" fill="#5a6b7b">時空の“性質”＝情報から時空が生まれる？</text>
         </g>
       </svg>
       <div class="maplegend">
+        <span><i style="background:#eef1f5;border:1.5px solid #9aa7b4;"></i>古典（近似）</span>
         <span><i style="background:#eaf4fc;border:1.5px solid #4aa3df;"></i>枠組み</span>
-        <span><i style="background:#e6f4ec;border:1.5px solid #38a169;"></i>確立した具体的な理論</span>
-        <span><i style="background:#efeafc;border:1.5px dashed #805ad5;"></i>挑戦中の仮説</span>
+        <span><i style="background:#e6f4ec;border:1.5px solid #38a169;"></i>確立した理論</span>
+        <span><i style="background:#efeafc;border:1.5px dashed #805ad5;"></i>未解決・挑戦中</span>
+        <span><i style="background:#e6f6f3;border:1.5px solid #2f9e8f;"></i>有力な手がかり</span>
       </div>
+      <p class="note" style="margin:12px 2px 0;">読み方のコツ：<b>下にいくほど「基本＝土台」</b>で、上の層は下から“近似”として生まれる（例：ニュートン力学は量子力学の大きなスケールでの近似）。数字は登場した<b>年代</b>。重力だけは<b>一般相対論</b>という別ルートで、量子と合流できていない――そこが<b>量子重力</b>の宿題。<span style="color:var(--ink-soft);">※ 物理学者・野村泰紀氏が動画で描いた「物理の全体図」を参考に再構成。</span></p>
     </div>
 
     <div class="tmap reveal">
