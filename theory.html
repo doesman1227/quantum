@@ -581,6 +581,23 @@ body{
 .thcard dd{ margin:2px 0 0; color:var(--ink-soft); font-size:.92rem; }
 .thmore{ display:inline-block; margin-top:12px; font-weight:800; font-size:.85rem; text-decoration:none; color:var(--blue); }
 .thmore:hover{ text-decoration:underline; }
+/* 全体図（1枚の地図） */
+.bigmap{ background:var(--window); border:1px solid var(--line); border-radius:14px;
+  padding:18px 16px; box-shadow:var(--shadow); margin:0 0 22px; }
+.bigmap svg{ width:100%; height:auto; display:block; max-width:680px; margin:0 auto; }
+.maplegend{ display:flex; gap:16px; flex-wrap:wrap; justify-content:center;
+  margin-top:14px; font-size:.8rem; color:var(--ink-soft); }
+.maplegend span{ display:inline-flex; align-items:center; gap:6px; }
+.maplegend i{ width:15px; height:12px; border-radius:3px; display:inline-block; }
+/* ゲージ理論のズームイン */
+.gaugefig{ background:var(--window); border:1px solid var(--line); border-radius:14px;
+  padding:16px; box-shadow:var(--shadow); margin:8px 0 18px; }
+.gaugefig svg{ width:100%; height:auto; display:block; max-width:660px; margin:0 auto; }
+.forcetbl{ width:100%; border-collapse:collapse; font-size:.92rem; margin:6px 0 4px; }
+.forcetbl th,.forcetbl td{ padding:9px 12px; border-bottom:1px solid var(--line); text-align:center; }
+.forcetbl th{ color:var(--blue-deep); background:#eef6ff; font-family:var(--font-ui); font-weight:400; letter-spacing:.03em; }
+.forcetbl td:first-child{ font-weight:700; color:var(--blue-deep); }
+.forcetbl tr:last-child td{ border-bottom:none; }
 </style>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔵</text></svg>">
 </head>
@@ -669,6 +686,67 @@ body{
     <h2 class="section-title">どれが「枠組み」で、どれが「具体的な1つ」？</h2>
     <p class="section-sub">上にいくほど大きな枠組み、下にいくほど具体的。インデントは「その中に含まれる」を表しているよ。</p>
 
+    <!-- 一枚で見る全体図 -->
+    <div class="bigmap reveal">
+      <svg viewBox="0 0 720 492" role="img" aria-label="物理理論の全体図：特殊相対論と量子力学から場の量子論・ゲージ理論・標準模型へ、そして未解決の大統一理論・量子重力へ">
+        <defs>
+          <marker id="arB" markerWidth="9" markerHeight="9" refX="6.5" refY="4" orient="auto">
+            <path d="M0 0 L8 4 L0 8 Z" fill="#4aa3df"/>
+          </marker>
+          <marker id="arP" markerWidth="9" markerHeight="9" refX="6.5" refY="4" orient="auto">
+            <path d="M0 0 L8 4 L0 8 Z" fill="#805ad5"/>
+          </marker>
+        </defs>
+        <g font-family="'Zen Maru Gothic','Hiragino Maru Gothic ProN',sans-serif" text-anchor="middle">
+          <!-- 土台の2枠組み -->
+          <rect x="40"  y="20" width="290" height="54" rx="10" fill="#eaf4fc" stroke="#4aa3df" stroke-width="2"/>
+          <text x="185" y="45" font-size="21" fill="#1e3a5f">特殊相対論</text>
+          <text x="185" y="64" font-size="12.5" fill="#5a6b7b">枠組み ・ 速い / 重い世界</text>
+          <rect x="390" y="20" width="290" height="54" rx="10" fill="#eaf4fc" stroke="#4aa3df" stroke-width="2"/>
+          <text x="535" y="45" font-size="21" fill="#1e3a5f">量子力学</text>
+          <text x="535" y="64" font-size="12.5" fill="#5a6b7b">枠組み ・ ミクロの世界</text>
+          <!-- 合体 -->
+          <path d="M185 74 L350 112" fill="none" stroke="#4aa3df" stroke-width="2" marker-end="url(#arB)"/>
+          <path d="M535 74 L370 112" fill="none" stroke="#4aa3df" stroke-width="2" marker-end="url(#arB)"/>
+          <text x="360" y="102" font-size="12" fill="#2b6cb0">＋ 合体すると</text>
+          <!-- 場の量子論 -->
+          <rect x="210" y="116" width="300" height="56" rx="10" fill="#eaf4fc" stroke="#4aa3df" stroke-width="2"/>
+          <text x="360" y="142" font-size="21" fill="#1e3a5f">場の量子論</text>
+          <text x="360" y="161" font-size="12.5" fill="#5a6b7b">枠組み ＝ 量子力学 ＋ 特殊相対論</text>
+          <path d="M360 172 L360 196" fill="none" stroke="#4aa3df" stroke-width="2" marker-end="url(#arB)"/>
+          <!-- ゲージ理論 -->
+          <rect x="210" y="198" width="300" height="56" rx="10" fill="#eaf4fc" stroke="#4aa3df" stroke-width="2"/>
+          <text x="360" y="224" font-size="21" fill="#1e3a5f">ゲージ理論</text>
+          <text x="360" y="243" font-size="12.5" fill="#5a6b7b">枠組み ＝ 力を「対称性」から導く</text>
+          <path d="M360 254 L360 278" fill="none" stroke="#4aa3df" stroke-width="2" marker-end="url(#arB)"/>
+          <!-- 標準模型 -->
+          <rect x="210" y="280" width="300" height="60" rx="10" fill="#e6f4ec" stroke="#38a169" stroke-width="2"/>
+          <text x="360" y="307" font-size="21" fill="#1f7a4d">標準模型</text>
+          <text x="360" y="326" font-size="12.5" fill="#5a6b7b">✅ 確立 ・ その中の具体的な1つ</text>
+          <!-- 仕切り -->
+          <line x1="40" y1="370" x2="680" y2="370" stroke="#c9b8e6" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <rect x="238" y="360" width="244" height="20" rx="10" fill="#ffffff"/>
+          <text x="360" y="374" font-size="12.5" fill="#805ad5">▼ ここから先は挑戦中（まだ仮説）</text>
+          <!-- 分岐 -->
+          <path d="M300 340 L185 402" fill="none" stroke="#805ad5" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arP)"/>
+          <path d="M420 340 L535 402" fill="none" stroke="#805ad5" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arP)"/>
+          <!-- 大統一理論 -->
+          <rect x="40"  y="406" width="290" height="64" rx="10" fill="#efeafc" stroke="#805ad5" stroke-width="2" stroke-dasharray="5 3"/>
+          <text x="185" y="433" font-size="20" fill="#5b3ba8">大統一理論</text>
+          <text x="185" y="453" font-size="12.5" fill="#5a6b7b">仮説 ・ 3つの力を1つに</text>
+          <!-- 量子重力 -->
+          <rect x="390" y="406" width="290" height="64" rx="10" fill="#efeafc" stroke="#805ad5" stroke-width="2" stroke-dasharray="5 3"/>
+          <text x="535" y="433" font-size="20" fill="#5b3ba8">量子重力</text>
+          <text x="535" y="453" font-size="12.5" fill="#5a6b7b">仮説 ・ 重力を量子に（超弦 / M / LQG）</text>
+        </g>
+      </svg>
+      <div class="maplegend">
+        <span><i style="background:#eaf4fc;border:1.5px solid #4aa3df;"></i>枠組み</span>
+        <span><i style="background:#e6f4ec;border:1.5px solid #38a169;"></i>確立した具体的な理論</span>
+        <span><i style="background:#efeafc;border:1.5px dashed #805ad5;"></i>挑戦中の仮説</span>
+      </div>
+    </div>
+
     <div class="tmap reveal">
       <div class="trow">
         <span class="tg fw">枠組み</span>
@@ -686,7 +764,7 @@ body{
       <div class="tarrow">↓ その中の“力を対称性で書く”タイプが…</div>
       <div class="trow ind2">
         <span class="tg fw">枠組み</span>
-        <div><h4>ゲージ理論</h4><p>力のはたらき方を「対称性」から導くタイプの場の量子論。</p></div>
+        <div><h4>ゲージ理論</h4><p>力のはたらき方を「対称性」から導くタイプの場の量子論。<a href="#gauge" style="font-weight:800;text-decoration:none;">→ くわしく</a></p></div>
       </div>
       <div class="tarrow">↓ その具体的な1つが…</div>
       <div class="trow ind2">
@@ -714,6 +792,66 @@ body{
     <div class="point" style="margin-top:20px;">
       <b>使えるコツ：</b>ニュースで「新理論」と聞いたら、まず
       <b>「これは“枠組み”の話？ それとも“具体的な1つ”の話？」</b>と考えてみよう。それだけで話の位置づけが分かる。
+    </div>
+  </div>
+</section>
+
+<!-- ゲージ理論ズームイン -->
+<section class="section-pad" id="gauge">
+  <div class="wrap">
+    <span class="eyebrow">ズームイン</span>
+    <h2 class="section-title">ゲージ理論：力は「対称性」から生まれる</h2>
+    <p class="section-sub">地図で「場の量子論」と「標準模型」をつなぐカギ。標準模型が“美しい”と言われる理由も、じつはここにある。</p>
+
+    <div class="analogy reveal">
+      <div class="aline">🔑 ひとことで言うと</div>
+      <p>ふつうは「力があるから、こう動く」と考えるよね。ゲージ理論は<b>発想が逆</b>。
+      「自然のルールは、ある“見かけの変換”をしても変わらないはず（＝<b>対称性</b>）」と要求すると、
+      それを成り立たせるために<b>力が自動的に現れる</b>。力は“後付け”ではなく、対称性の<b>必然の帰結</b>なんだ。</p>
+    </div>
+
+    <div class="gaugefig reveal">
+      <svg viewBox="0 0 700 120" role="img" aria-label="対称性を保てという要求から、埋め合わせのゲージ場、そして力を伝える粒子が生まれる流れ">
+        <defs>
+          <marker id="arG" markerWidth="9" markerHeight="9" refX="6.5" refY="4" orient="auto">
+            <path d="M0 0 L8 4 L0 8 Z" fill="#dd6b20"/>
+          </marker>
+        </defs>
+        <g font-family="'Zen Maru Gothic','Hiragino Maru Gothic ProN',sans-serif" text-anchor="middle">
+          <rect x="18"  y="34" width="176" height="58" rx="10" fill="#eaf4fc" stroke="#4aa3df" stroke-width="2"/>
+          <text x="106" y="60" font-size="17" fill="#1e3a5f">「対称性を保て」</text>
+          <text x="106" y="80" font-size="12.5" fill="#5a6b7b">という要求</text>
+          <path d="M198 63 L256 63" fill="none" stroke="#dd6b20" stroke-width="2" marker-end="url(#arG)"/>
+          <text x="227" y="52" font-size="11.5" fill="#b35c12">すると必要に</text>
+          <rect x="262" y="34" width="176" height="58" rx="10" fill="#fdf0e3" stroke="#dd6b20" stroke-width="2"/>
+          <text x="350" y="60" font-size="17" fill="#b35c12">埋め合わせの場</text>
+          <text x="350" y="80" font-size="12.5" fill="#5a6b7b">＝ ゲージ場</text>
+          <path d="M442 63 L500 63" fill="none" stroke="#dd6b20" stroke-width="2" marker-end="url(#arG)"/>
+          <text x="471" y="52" font-size="11.5" fill="#b35c12">の正体は</text>
+          <rect x="506" y="34" width="176" height="58" rx="10" fill="#fff6db" stroke="#e0a800" stroke-width="2"/>
+          <text x="594" y="60" font-size="17" fill="#8a6a00">力を伝える粒子</text>
+          <text x="594" y="80" font-size="12.5" fill="#5a6b7b">＝ ゲージ粒子</text>
+        </g>
+      </svg>
+      <p class="note" style="text-align:center;margin:4px 0 0;">「対称性を場所ごとに自由に変えても壊れない」ようにするには、埋め合わせ役の場が要る。それが力の粒子の正体。</p>
+    </div>
+
+    <p style="margin:0 0 12px;">この考え方を「<b>ゲージ原理</b>」と呼ぶよ。どんな対称性を選ぶかで、現れる力の種類が決まる。
+    標準模型の3つの力は、じつは<b>3つの対称性</b>から、そっくりこの手順で導かれているんだ。</p>
+
+    <table class="forcetbl">
+      <thead><tr><th>選んだ対称性</th><th>現れる力</th><th>伝える粒子（ゲージ粒子）</th></tr></thead>
+      <tbody>
+        <tr><td>U(1)</td><td>電磁気力</td><td>光子</td></tr>
+        <tr><td>SU(2)</td><td>弱い力</td><td>W ボソン・Z ボソン</td></tr>
+        <tr><td>SU(3)</td><td>強い力</td><td>グルーオン（8種）</td></tr>
+      </tbody>
+    </table>
+
+    <div class="point" style="margin-top:16px;">
+      <b>つながりのポイント：</b>「場の量子論」という<b>枠組み</b>の中で、「対称性 → 力」というゲージ原理を採用し、
+      上の3つの対称性を選んで組み上げた<b>具体的な1つ</b>が<a href="standard-model.html">標準模型</a>。
+      地図の <span style="color:#4aa3df;font-weight:800;">場の量子論 → ゲージ理論 → 標準模型</span> は、この流れを表しているよ。
     </div>
   </div>
 </section>
